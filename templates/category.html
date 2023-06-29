@@ -27,20 +27,22 @@
 
     {% if category %}
     <div>
-        <div>
-            <p><a href="{% url 'shop:allProdCat' %}">Our Product Collection</a></p>
+        <div class="row">
+            <div class="mx-auto">
+                <p><a href="{% url 'shop:allProdCat' %}">Our Product Collection</a></p>
+            </div>
         </div>
     </div>
     {% endif %}
 
     {% if category %}
         <div>
-            <img src="{{category.image.url}}" alt="{{category.name}}" >
+            <img class="cat-img" src="{{category.image.url}}" alt="{{category.name}}" >
         </div>
         <br>
         <div>
-            <h1>{{category.name}}</h1>
-            <p>{{category.description}}</p>
+            <h1 class="text-center">{{category.name}}</h1>
+            <p class="text-justify">{{category.description}}</p>
         </div>
     {% else %}
         <div>
@@ -54,10 +56,10 @@
 
     {% endif %}
 <div>
-    {% for product in products %}
+    {% for product in products.object_list %}
     <div>
         <div>
-            <a href=""><img src="{{product.image.url}}" alt="{{product.name}}"></a>
+            <a href="{{product.get_url}}"><img src="{{product.image.url}}" class="cat-img" alt="{{product.name}}"></a>
             <div>
                 <h4>{{product.name}}</h4>
                 <p>{{product.price}}</p>
@@ -66,5 +68,15 @@
     </div>
     {% endfor %}
 </div>
+
+<div class="mx-auto">
+    {% if products.paginator.num_pages > 1 %}
+    {% endif %}
+    <br>
+    <div class="text-center">
+        {% for pg in products.paginator.page_range %}
+            <a href="?page={{pg}}" class="btn btn-light btn-sm {% if products.number == pg %} active {% endif %}">{{pg}}</a>
+        {% endfor %}
+    </div>
 
 {% endblock  %}

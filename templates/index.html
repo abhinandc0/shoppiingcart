@@ -1,11 +1,24 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-</head>
-<body>
-    <h1>Home Page</h1>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Home{% endblock  %}
+
+{% block content %}
+<div class="align-content-end">
+<div class="row row-center" >
+{% for cat in links %}
+
+<div class="card p-2" style="width: 18rem;">
+    <img class="card-img-top" src="{{cat.image.url}}" alt="{{cat.name}}">
+    <div class="card-body pb-2">
+      <h5 class="card-title">{{cat.name}}</h5>
+      <p class="card-text">{{cat.descripriprion}}</p>
+      <a href="{{cat.get_url}}" class="btn btn-primary card-btn">View</a>
+    </div>
+  </div>
+
+{% endfor %}
+</div>
+</div>
+
+{% endblock  %}
