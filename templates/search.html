@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metadescription %}
+    Welcome to search page
+{% endblock  %}
+
+{% block title %}
+    Search
+{% endblock  %}
+
+{% block content %}
+
+<div>
+    <p>You just searched for {{query}}</p>
+</div>
+<div class="container">
+    {% for product in products %}
+    <a href="{{product.get_url}}"><img src=""></a>
+    <h4>{{product.name}}</h4>
+    {% empty %}
+    <div>
+        <p>0 results found</p>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock  %}
