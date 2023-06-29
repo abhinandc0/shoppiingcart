@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block metedescription %}
+
+    {% if category %}
+        {{ category.description|truncatewords:155 }}
+    {% else %}
+        Welcome To Kart Shop
+    {% endif %}
+
+{% endblock  %}
+
+
+{% block title %}
+
+    {% if category %}
+        {{category.name }} - Kart
+    {% else %}
+        Collections
+    {% endif %}
+
+{% endblock  %}
+
+
+{% block content %}
+
+    {% if category %}
+    <div>
+        <div>
+            <p><a href="{% url 'shop:allProdCat' %}">Our Product Collection</a></p>
+        </div>
+    </div>
+    {% endif %}
+
+    {% if category %}
+        <div>
+            <img src="{{category.image.url}}" alt="{{category.name}}" >
+        </div>
+        <br>
+        <div>
+            <h1>{{category.name}}</h1>
+            <p>{{category.description}}</p>
+        </div>
+    {% else %}
+        <div>
+            <img src="{% static 'img/banner.jpg' %}" alt="Products">
+        </div>
+        <br>
+        <div>
+            <h1>All Products</h1>
+            <p>{% lorem 9 p random %}</p>
+        </div>
+
+    {% endif %}
+<div>
+    {% for product in products %}
+    <div>
+        <div>
+            <a href=""><img src="{{product.image.url}}" alt="{{product.name}}"></a>
+            <div>
+                <h4>{{product.name}}</h4>
+                <p>{{product.price}}</p>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+{% endblock  %}
