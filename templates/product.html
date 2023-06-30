@@ -39,7 +39,7 @@
             {% if product.stock <= 0 %}
             <p><b>Our of Stock</b></p>
             {% else %}
-            <a href="">Add to Cart</a>
+            <a href="{% url 'mycart:add_cart' product.id %}">Add to Cart</a>
             {% endif %}
         </div>
     </div>
